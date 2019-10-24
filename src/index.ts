@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   var squares = document.querySelectorAll("#square");
 
   function startGame(){
-    stopGame();
+    clearGame();
     document.getElementById("points").textContent = Points;
     document.getElementById("lifes").textContent = Lifes;
     document.getElementById("timer").textContent = Time;
@@ -25,10 +25,21 @@ document.addEventListener("DOMContentLoaded", function(event) {
   }
 
   function resetGame(){
-    stopGame();
+    clearGame();
     document.getElementById("points").textContent = Points;
     document.getElementById("lifes").textContent = Lifes;
     document.getElementById("timer").textContent = Time;
+    removeClickEventListenerFromSquares();
+    sendAlert("Stan zresetowany.")
+  }
+
+  function clearGame(){
+    clearAlert();
+    clearTimeout(alertTimeout);
+    clearInterval(selectGreen);
+    clearInterval(countdownTimer);
+    clearTimeout(cleanGreenSquare);
+    removeSelection();
     removeClickEventListenerFromSquares();
   }
 
@@ -41,20 +52,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
         var tmpText = timeNumber.toString();
         time.textContent = tmpText;
       } else {
-        stopGame();
+        clearGame();
         sendAlert("Koniec czasu!");
       }
     }, 1000);
-  }
-
-  function stopGame(){
-    clearAlert();
-    clearTimeout(alertTimeout);
-    clearInterval(selectGreen);
-    clearInterval(countdownTimer);
-    clearTimeout(cleanGreenSquare);
-    removeSelection();
-    removeClickEventListenerFromSquares();
   }
 
   function selectSquare(){
@@ -73,19 +74,19 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   function checkSquare(){
     if(this.classList.contains("green")){
-      addPoint(this);
+      addPoint();
+      this.classList.remove("green")
     } else {
       takeOneLife();
     }
   }
 
-  function addPoint(clickedSquare){
+  function addPoint(){
     var points = document.getElementById("points");
     var pointsNumber = parseInt(points.innerHTML);
     pointsNumber++;
     var tmpText = pointsNumber.toString();
     points.textContent = tmpText;
-    clickedSquare.classList.remove("green")
   }
 
   function takeOneLife(){
@@ -97,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
       var tmpText = lifesNumber.toString();
       lifes.textContent = tmpText;
     } else {
-      stopGame();
+      clearGame();
       sendAlert("Koniec żyć!");
     }
   }
@@ -134,9 +135,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
   function generateTable(x: number){
     var gameBoardTable = document.createElement('table');
     gameBoardTable.setAttribute("id", "gameTable");
-    for (let i = 0; i < x; i++) {
+    for (var i = 0; i < x; i++) {
       var row = gameBoardTable.insertRow();
-      for(let j = 0; j < x; j++) {
+      for(var j = 0; j < x; j++) {
         var cell = row.insertCell();
         var square = document.createElement('div');
         square.setAttribute("id", "square");
