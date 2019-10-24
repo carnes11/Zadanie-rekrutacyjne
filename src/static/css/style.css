@@ -1,0 +1,48 @@
+#header-wrap {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  text-align: center;
+  vertical-align: middle;
+  padding: 1rem 0;
+}
+
+#square {
+  display: inline-flex;
+  width: 40px;
+  height: 40px;
+  margin-right: 6px;
+}
+
+#game-squares {
+  display: flex;
+  justify-content: center;
+}
+
+.notification {
+  font-weight: bold;
+}
+
+.green {
+  background-color: limegreen;
+}
+
+.box150 {
+  width: 150px;
+}
+
+.points, #reset {
+  margin-left: 5px;
+}
+
+.header-left   {
+  display: inline-flex;
+}
+
+.game-board {
+  padding: 1rem
+}
+
+.game-buttons {
+  display: inline-flex;
+}

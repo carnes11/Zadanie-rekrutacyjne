@@ -26,6 +26,7 @@
   "author": "Gdańskie Wydawnictwo Oswiatowe",
   "license": "free",
   "dependencies": {
-    "@babel/polyfill": "^7.2.5"
+    "@babel/polyfill": "^7.2.5",
+    "bootstrap": "^4.3.1"
   }
 }
