@@ -42,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         time.textContent = tmpText;
       } else {
         stopGame();
+        sendAlert("Koniec czasu!");
       }
     }, 1000);
   }
